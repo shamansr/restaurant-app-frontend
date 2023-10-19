@@ -1,0 +1,42 @@
+<p>
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <span>
+        <img
+          class="img"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYFs9k8jASzU5xqGnvkxsft2g1mgfGFVi5ng&usqp=CAU"
+          width="50px"
+          height="50px"
+          alt="Logo"
+        />
+      </span>
+      <span class="example-spacer"></span>
+      <div class="example-button-row">
+        <button
+          mat-raised-button
+          *ngIf="isLoggedOut()"
+          (click)="openSignupDialog()"
+          color="accent"
+        >
+          SignUp
+        </button>
+        <button
+          mat-raised-button
+          *ngIf="isLoggedOut()"
+          (click)="openLoginDialog()"
+          color="accent"
+        >
+          LogIn
+        </button>
+        <button
+          mat-raised-button
+          *ngIf="!isLoggedOut()"
+          (click)="openLoginDialog()"
+          color="accent"
+        >
+          Logout
+        </button>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</p>

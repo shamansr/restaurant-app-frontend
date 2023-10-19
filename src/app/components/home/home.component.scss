@@ -1,0 +1,29 @@
+.background-container {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url('https://images.pexels.com/photos/1310777/pexels-photo-1310777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    background-size: auto;
+    background-position: center;
+    height: 89vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .text-container {
+    color: white; 
+  }
+  
+  .main-heading {
+    font-size: 100px;
+    font-weight: 1000;
+    font-family: Georgia, 'Times New Roman', Times, serif, sans-serif;
+  }
+  
+  .sub-heading {
+    margin-top: 40px;
+    font-size: 30px;
+    font-weight: 500px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  
