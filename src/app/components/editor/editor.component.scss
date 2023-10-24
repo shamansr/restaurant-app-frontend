@@ -1,0 +1,36 @@
+.editor-container {
+  width: 95%;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 5px #aaa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  margin: 0 auto; /* Center horizontally */
+}
+
+.editor-content {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 10px 0;
+  padding: 10px; /* Add padding to separate content from the button */
+}
+
+.submit-button {
+  border: #673ab7;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 10px; /* Add margin to separate the button from the content */
+}
+
+.submit-button:hover {
+  background-color: #511bad;
+}
+
+.modal-heading {
+  margin-top: 10px;
+  font-weight: bold;
+  text-align: center;
+}

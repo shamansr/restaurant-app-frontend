@@ -17,6 +17,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HomeComponent } from './components/home/home.component';
 import { FeedComponent } from './components/feed/feed.component';
+import { QuillModule } from 'ngx-quill';
+import { EditorComponent } from './components/editor/editor.component';
+import { FriendsComponent } from './components/friends/friends.component';
+import { MatCardModule } from '@angular/material/card'
 
 @NgModule({
   declarations: [
@@ -25,7 +29,9 @@ import { FeedComponent } from './components/feed/feed.component';
     SignupComponent,
     LoginComponent,
     HomeComponent,
-    FeedComponent
+    FeedComponent,
+    EditorComponent,
+    FriendsComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +46,8 @@ import { FeedComponent } from './components/feed/feed.component';
     MatInputModule,
     HttpClientModule,
     MatSnackBarModule,
+    QuillModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

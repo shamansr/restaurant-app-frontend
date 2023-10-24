@@ -1,10 +1,29 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  AbstractControl,
+  ValidationErrors,
+} from '@angular/forms';
+import {
+  MatSnackBar,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 import { LoginService } from 'src/app/services/loginService/login.service';
 import { AuthService } from 'src/app/services/authService/auth.service';
 import { Router } from '@angular/router';
+
+function validateEmailWithDotCom(
+  control: AbstractControl
+): ValidationErrors | null {
+  const email = control.value;
+  if (!email.endsWith('.com')) {
+    return { invalidEmail: true };
+  }
+  return null;
+}
 
 @Component({
   selector: 'app-login',
@@ -23,7 +42,7 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {
     this.loginForm = this.fb.group({
-      emailId: ['', [Validators.required, Validators.email]],
+      emailId: ['', [Validators.required, validateEmailWithDotCom]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
@@ -34,24 +53,27 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       const formData = this.loginForm.value;
       formData.password = btoa(formData.password);
-      this.loginService.login(formData).subscribe((response) => {
-        // Handle the response from the backend
-        localStorage.setItem('userToken', response.token); // Store the user token in local storage
-        this.router.navigate(['/feed']);
-        this.dialogRef.close();
-        this.snackBar.open('You have logged in successfully', 'Close', {
-          duration: 2000,
-        });
-        console.log('Response from the backend:', response);
-  
-        this.authService.isLoggedIn = true;
-      });
-    } else {
-      this.authService.isLoggedIn = false;
-      this.snackBar.open('Invalid credentials');
+      this.loginService.login(formData).subscribe(
+        (response) => {
+          // Handle the response from the backend
+          this.router.navigate(['/feed']);
+          this.dialogRef.close();
+          this.snackBar.open(response.msg, 'Close', {
+            duration: 2000,
+            verticalPosition: 'top',
+          });
+          localStorage.setItem('token', response.result.token);
+          this.authService.isLoggedIn = true;
+        },
+        (error) => {
+          this.snackBar.open(error.error.message, 'Close', {
+            duration: 2000,
+            verticalPosition: 'top',
+          });
+        }
+      );
     }
   }
-  
 
   onNoClick(): void {
     this.dialogRef.close();
