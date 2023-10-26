@@ -1,4 +1,4 @@
-  <mat-toolbar>
+  <mat-toolbar class="toolbar">
     <mat-toolbar-row>
       <span>
         <img
@@ -15,6 +15,7 @@
           mat-raised-button
           class="center-button"
           *ngIf="!isLoggedOut()"
+          (click)="scrollToTop()"
           color="primary"
         >
           Feed

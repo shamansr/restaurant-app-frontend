@@ -50,4 +50,8 @@ export class EditorComponent implements AfterViewInit {
   toggleEditorVisibility() {
     this.isEditorVisible = false;
   }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 }

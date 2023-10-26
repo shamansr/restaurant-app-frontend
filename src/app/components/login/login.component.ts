@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
             verticalPosition: 'top',
           });
           localStorage.setItem('token', response.result.token);
-          this.authService.isLoggedIn = true;
+          this.authService.setLoggedInState(true)
         },
         (error) => {
           this.snackBar.open(error.error.message, 'Close', {

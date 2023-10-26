@@ -11,7 +11,7 @@ export class SignupService {
 
   signup(formData: any): Observable<any> {
 
-    const apiUrl = 'http://localhost:4000/v1/api/signup';
+    const apiUrl = 'http://localhost:4000/v1/api/user/signup';
 
     // Send the HTTP POST request and return the Observable
     return this.http.post(apiUrl, formData);

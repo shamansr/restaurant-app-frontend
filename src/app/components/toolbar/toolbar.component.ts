@@ -16,6 +16,9 @@ import { FriendsComponent } from '../friends/friends.component';
 })
 
 export class ToolbarComponent {
+
+  isLoggedIn = false
+
   constructor(
     public dialog: MatDialog,
     private authService: AuthService,
@@ -33,7 +36,7 @@ export class ToolbarComponent {
       this.dialog
       .open(EditorComponent, {
         width: '50%',
-        height: '35%'
+        height: '41%'
       })
       .afterClosed()
       .subscribe((result) => {})
@@ -69,12 +72,16 @@ export class ToolbarComponent {
     }
   }
 
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   logout(): void {
     this.logoutService.logout().subscribe(() => {
       // Clear the user token from local storage
       localStorage.removeItem('token');
       // Set the isLoggedIn property in AuthService to false
-      this.authService.isLoggedIn = false;
+      this.authService.setLoggedInState(false)
       // Navigate back to the home screen or the appropriate route
       this.router.navigate(['']);
       this.snackbar.open('Logged out successfully', 'Close', {

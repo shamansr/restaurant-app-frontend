@@ -11,7 +11,7 @@ export class LoginService {
 
   login(formData: any): Observable<any> {
 
-    const apiUrl = 'http://localhost:4000/v1/api/login';
+    const apiUrl = 'http://localhost:4000/v1/api/user/login';
 
     // Send the HTTP POST request and return the Observable
     return this.http.post(apiUrl, formData);
