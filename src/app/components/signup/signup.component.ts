@@ -7,11 +7,8 @@ import {
   AbstractControl,
   ValidationErrors,
 } from '@angular/forms';
-import {
-  MatSnackBar,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
 import { SignupService } from 'src/app/services/signupService/signup.service';
+import { SnackBarService } from 'src/app/services/snackBar/snack-bar.service';
 
 function validateEmailWithDotCom(
   control: AbstractControl
@@ -35,7 +32,7 @@ export class SignupComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<SignupComponent>,
     private fb: FormBuilder,
-    private snackBar: MatSnackBar,
+    private snackBar: SnackBarService,
     private signupService: SignupService
   ) {
     this.signupForm = this.fb.group({
@@ -52,14 +49,16 @@ export class SignupComponent implements OnInit {
     if (this.signupForm.valid) {
       const formData = this.signupForm.value;
       formData.password = btoa(formData.password);
-      this.signupService.signup(formData).subscribe((response) => {
-        // Handle the response from the backend
-        this.dialogRef.close();
-        this.snackBar.open(response.msg, 'Close', {
-          duration: 2000,
-          verticalPosition: 'top',
-        });
-      });
+      this.signupService.signup(formData).subscribe(
+        (response) => {
+          // Handle the response from the backend
+          this.dialogRef.close();
+          this.snackBar.openSuccessSnackbar(response.msg, 'Close');
+        },
+        (error) => {
+          this.snackBar.openErrorSnackbar(error.message, 'Close');
+        }
+      );
     }
   }
 

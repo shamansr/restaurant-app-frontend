@@ -20,8 +20,9 @@ import { FeedComponent } from './components/feed/feed.component';
 import { QuillModule } from 'ngx-quill';
 import { EditorComponent } from './components/editor/editor.component';
 import { FriendsComponent } from './components/friends/friends.component';
-import { MatCardModule } from '@angular/material/card'
-
+import { MatCardModule } from '@angular/material/card';
+import { AddfriendsComponent } from './components/addfriends/addfriends.component';
+import { SnackBarComponent } from './components/snack-bar/snack-bar.component'
 
 @NgModule({
   declarations: [
@@ -32,7 +33,9 @@ import { MatCardModule } from '@angular/material/card'
     HomeComponent,
     FeedComponent,
     EditorComponent,
-    FriendsComponent
+    FriendsComponent,
+    AddfriendsComponent,
+    SnackBarComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,7 @@ import { MatCardModule } from '@angular/material/card'
     QuillModule,
     MatCardModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [SnackBarComponent],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

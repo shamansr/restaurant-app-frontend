@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ContentService } from 'src/app/services/content/content.service';
 import { PostService } from 'src/app/services/postService/post.service';
 
 @Component({
@@ -8,17 +9,24 @@ import { PostService } from 'src/app/services/postService/post.service';
 })
 export class FeedComponent implements OnInit {
   posts: any[] = [];
+  content: string = ''; // Variable to hold the shared content
 
-  constructor(private postService: PostService) {}
+  constructor(
+    private postService: PostService,
+    private contentSharingService: ContentService
+  ) {}
 
   ngOnInit() {
-    this.getPosts()
+    this.getPosts();
+    this.contentSharingService.content$.subscribe((content) => {
+      this.content = content; // Update the content when shared content changes
+    });
   }
 
   getPosts() {
     this.postService.getPosts().subscribe(
       (data) => {
-        this.posts = data.posts; // Update the posts array
+        this.posts = data.posts.reverse(); // Update the posts array
       },
       (error) => {
         console.error('Error fetching posts:', error);
@@ -40,9 +48,7 @@ export class FeedComponent implements OnInit {
         post.likes++;
         post.liked = true;
       },
-      (error) => {
-        console.log('Error liking the post', error);
-      }
+      (error) => {}
     );
   }
 
@@ -52,9 +58,7 @@ export class FeedComponent implements OnInit {
         post.likes--;
         post.liked = false;
       },
-      (error) => {
-        console.log('Error unliking the post', error);
-      }
+      (error) => {}
     );
   }
 }

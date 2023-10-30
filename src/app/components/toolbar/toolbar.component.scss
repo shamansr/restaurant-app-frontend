@@ -11,7 +11,7 @@ button {
 }
 
 .center-button {
-  margin-right: 450px;
+  margin-right: 350px;
 }
 
 .user-greeting {
@@ -19,7 +19,9 @@ button {
 }
 
 .toolbar {
-  position: sticky;
+  position: fixed;
   top: 0;
+  width: 100%;
   z-index: 1000;
 }
+

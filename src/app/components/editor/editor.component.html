@@ -2,17 +2,18 @@
   <button class="close-btn" mat-icon-button (click)="onNoClick()">
     <mat-icon>close</mat-icon>
   </button>
-<h3 class="modal-heading">New Post</h3>
-<div class="editor-container">
-  <div class="editor-content">
-    <div #editor></div>
+  <h2 class="modal-heading">New Post</h2>
+  <div class="editor-container">
+    <div class="editor-content">
+      <div class="editor" #editor></div>
+    </div>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="submitEditorContent()"
+      class="submit-button"
+    >
+      Submit
+    </button>
   </div>
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="submitEditorContent()"
-    class="submit-button"
-  >
-    Submit
-  </button>
 </div>

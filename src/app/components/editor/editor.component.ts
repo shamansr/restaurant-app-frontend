@@ -1,11 +1,9 @@
 import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import Quill from 'quill';
 import { PostService } from 'src/app/services/postService/post.service';
-import {
-  MatSnackBar,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
 import { MatDialogRef } from '@angular/material/dialog';
+import { ContentService } from 'src/app/services/content/content.service';
+import { SnackBarService } from 'src/app/services/snackBar/snack-bar.service';
 
 @Component({
   selector: 'app-editor',
@@ -19,8 +17,9 @@ export class EditorComponent implements AfterViewInit {
 
   constructor(
     private postService: PostService,
-    private snackBar: MatSnackBar,
-    private dialogRef: MatDialogRef<EditorComponent>
+    private snackBar: SnackBarService,
+    private dialogRef: MatDialogRef<EditorComponent>,
+    private contentSharingService: ContentService
   ) {
     this.editorElement = {} as ElementRef;
   }
@@ -34,12 +33,9 @@ export class EditorComponent implements AfterViewInit {
   submitEditorContent() {
     const content = this.quill.root.innerHTML; // Get the HTML content from the editor
     this.postService.saveContent(content).subscribe((result) => {
-      console.log('Submit Result', result);
 
-      this.snackBar.open(result.message, 'Close', {
-        duration: 2000,
-        verticalPosition: 'top',
-      });
+      this.snackBar.openSuccessSnackbar(result.message, 'Close');
+      this.contentSharingService.updateContent(content); // Update shared content
       setTimeout(() => {
         this.toggleEditorVisibility();
       }, 1000);

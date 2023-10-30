@@ -7,13 +7,10 @@ import {
   AbstractControl,
   ValidationErrors,
 } from '@angular/forms';
-import {
-  MatSnackBar,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
 import { LoginService } from 'src/app/services/loginService/login.service';
 import { AuthService } from 'src/app/services/authService/auth.service';
 import { Router } from '@angular/router';
+import { SnackBarService } from 'src/app/services/snackBar/snack-bar.service';
 
 function validateEmailWithDotCom(
   control: AbstractControl
@@ -36,7 +33,7 @@ export class LoginComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<LoginComponent>,
     private fb: FormBuilder,
-    private snackBar: MatSnackBar,
+    private snackBar: SnackBarService,
     private loginService: LoginService,
     private authService: AuthService,
     private router: Router
@@ -58,18 +55,13 @@ export class LoginComponent implements OnInit {
           // Handle the response from the backend
           this.router.navigate(['/feed']);
           this.dialogRef.close();
-          this.snackBar.open(response.msg, 'Close', {
-            duration: 2000,
-            verticalPosition: 'top',
-          });
+          this.snackBar.openSuccessSnackbar(response.msg, 'Close');
+
           localStorage.setItem('token', response.result.token);
-          this.authService.setLoggedInState(true)
+          this.authService.setLoggedInState(true);
         },
         (error) => {
-          this.snackBar.open(error.error.message, 'Close', {
-            duration: 2000,
-            verticalPosition: 'top',
-          });
+          this.snackBar.openErrorSnackbar(error.error.message, 'Close');
         }
       );
     }

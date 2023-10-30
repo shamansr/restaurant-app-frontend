@@ -1,3 +1,11 @@
+.modal-heading {
+  margin-top: 10px;
+  margin-left: 10px;
+  font-weight: bold;
+  text-align: left;
+  overflow: hidden;
+}
+
 .editor-container {
   width: 95%;
   border: 1px solid #ccc;
@@ -6,7 +14,14 @@
   flex-direction: column;
   align-items: center;
   padding: 10px;
-  margin: 0 auto; /* Center horizontally */
+  margin: 0 auto;
+}
+
+.close-btn {
+  position: absolute;
+  top: -1px;
+  right: 10px;
+  overflow: hidden;
 }
 
 .editor-content {
@@ -14,7 +29,8 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   margin: 10px 0;
-  padding: 10px; /* Add padding to separate content from the button */
+  padding: 10px;
+  overflow-y: auto;
 }
 
 .submit-button {
@@ -22,15 +38,11 @@
   border-radius: 10px;
   padding: 10px 20px;
   cursor: pointer;
-  margin-top: 10px; /* Add margin to separate the button from the content */
+  margin-top: 10px;
+  height: 33px;
+  overflow: hidden;
 }
 
 .submit-button:hover {
   background-color: #511bad;
-}
-
-.modal-heading {
-  margin-top: 10px;
-  font-weight: bold;
-  text-align: center;
 }

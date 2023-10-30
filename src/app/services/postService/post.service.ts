@@ -42,7 +42,6 @@ export class PostService {
     })
 
     const apiUrl = `http://localhost:4000/v1/api/post/likes:${postId}`
-    console.log('Increement likes',apiUrl)
 
     return this.httpClient.post(apiUrl, null, { headers })
   }
@@ -55,7 +54,6 @@ export class PostService {
 
     // Construct the API URL for unliking a post
     const apiUrl = `http://localhost:4000/v1/api/post/likes:${postId}`;
-    console.log('Decreement likes',apiUrl)
     // Use the HTTP DELETE method to unlike the post
     return this.httpClient.delete(apiUrl, { headers });
   }
